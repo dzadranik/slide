@@ -1,0 +1,42 @@
+// sass-lint:disable clean-import-paths
+@import '../../node_modules/reset-css/sass/_reset.scss'
+
+body
+    width: 100%
+    height: 100vh
+    font-family: 'Alata', sans-serif
+    font-size: 16PX
+
+.wrap
+    position: relative
+
+.wait
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 10
+    padding: 10px
+    opacity: 0
+    transition: opacity .2s ease-in
+    &.is-show
+        opacity: 1
+
+.sliders
+    position: relative
+    height: 100vh
+    &__slide
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 1
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 100%
+        height: 100vh
+        // sass-lint:disable no-color-literals
+        background: #fff
+        &.is-active
+            z-index: 9
+    &__number
+        font-size: 150px

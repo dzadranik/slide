@@ -1,0 +1,32 @@
+# Rules https://github.com/sasstools/sass-lint/tree/master/docs/rules
+# Order https://github.com/sasstools/sass-lint/blob/develop/lib/config/property-sort-orders/recess.yml
+
+files:
+    ignore:
+        - src/special/**
+        - node_modules/**
+
+rules:
+    indentation:
+        - 2
+        - size: 4
+    clean-import-paths:
+        - false
+        - leading-underscore: true
+    class-name-format:
+        - false
+        - convention: strictbem
+    variable-name-format:
+        - allow-leading-underscore: false
+        - convention: camelcase
+    mixin-name-format:
+        - allow-leading-underscore: false
+        - convention: camelcase
+    force-pseudo-nesting: 0
+    no-vendor-prefixes: 0
+    mixins-before-declarations: 0
+    extends-before-declarations: 0
+    empty-line-between-blocks: 0
+    property-sort-order:
+        - 1
+        - order: 'recess'
