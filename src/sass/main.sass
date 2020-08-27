@@ -9,6 +9,8 @@ body
 
 .wrap
     position: relative
+    height: 100vh
+    overflow: hidden
 
 .wait
     position: absolute
@@ -17,18 +19,16 @@ body
     z-index: 10
     padding: 10px
     opacity: 0
-    transition: opacity .2s ease-in
+    transition: opacity .5s ease-in
     &.is-show
         opacity: 1
 
 .sliders
-    position: relative
-    height: 100vh
+    position: absolute
+    top: 0
+    width: 100%
+    transition: top .3s ease-in
     &__slide
-        position: absolute
-        top: 0
-        left: 0
-        z-index: 1
         display: flex
         align-items: center
         justify-content: center
@@ -36,7 +36,7 @@ body
         height: 100vh
         // sass-lint:disable no-color-literals
         background: #fff
-        &.is-active
-            z-index: 9
+        &:nth-child(even)
+            color: #0277ca
     &__number
         font-size: 150px

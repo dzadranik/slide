@@ -17,12 +17,8 @@ html(lang="ru")
             .sliders
                 - var n = 0;
                 while n < 10
-                    if n == 0
-                        .sliders__slide.is-active
-                            .sliders__number= n++
-                    else
-                        .sliders__slide
-                            .sliders__number= n++
+                    .sliders__slide(data-number=n)
+                        .sliders__number= n++
 
 
         <script src="./js/main.js"></script>
