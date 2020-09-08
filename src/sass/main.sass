@@ -1,5 +1,7 @@
-// sass-lint:disable clean-import-paths
-@import '../../node_modules/reset-css/sass/_reset.scss'
+@import '../../node_modules/reset-css/sass/_reset'
+
+$clrWhite: rgba(255, 255, 255, 1)
+$clrBlue: rgba(2, 119, 202, 1)
 
 body
     width: 100%
@@ -7,12 +9,12 @@ body
     font-family: 'Alata', sans-serif
     font-size: 16PX
 
-.wrap
+.mn-wrap
     position: relative
     height: 100vh
     overflow: hidden
 
-.wait
+.mn-wait
     position: absolute
     top: 0
     left: 0
@@ -23,20 +25,19 @@ body
     &.is-show
         opacity: 1
 
-.sliders
+.sl-sliders
     position: absolute
     top: 0
     width: 100%
     transition: top .3s ease-in
-    &__slide
+    &_slide
         display: flex
         align-items: center
         justify-content: center
         width: 100%
         height: 100vh
-        // sass-lint:disable no-color-literals
-        background: #fff
+        background: $clrWhite
         &:nth-child(even)
-            color: #0277ca
-    &__number
+            color: $clrBlue
+    &_number
         font-size: 150px

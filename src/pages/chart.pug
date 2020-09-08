@@ -8,18 +8,13 @@ html(lang="ru")
         <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 
         <!-- css global -->
-        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/chart.css">
         <!-- //css global -->
     </head>
     body
-        .mn-wrap
-            .mn-wait.js-wait Waiting...
-            .sl-sliders.js-sliders
-                - var n = 0;
-                while n < 10
-                    .sl-sliders_slide.js-slide(data-number=n)
-                        .sl-sliders_number= n++
-
-
-        <script src="./js/main.js"></script>
+        .chart
+        .chart2
+        .chart3
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+        <script src="./js/chart.js"></script>
 

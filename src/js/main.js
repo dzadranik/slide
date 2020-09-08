@@ -1,10 +1,10 @@
 import '../sass/main.sass'
 
-const wait = document.querySelector('.wait'),
-    sliders = document.querySelector('.sliders'),
+const wait = document.querySelector('.js-wait'),
+    sliders = document.querySelector('.js-sliders'),
     move = moveElements()
 let slider = {
-    countElements: document.querySelectorAll('.sliders__slide').length - 1,
+    countElements: document.querySelectorAll('.js-slide').length - 1,
     intervalWheel: 70,
     intervalSlider: 600,
     marker: true,
@@ -16,6 +16,7 @@ function wheel(e) {
     let direction
     slider.counter1 += 1
     e.deltaY > 0 ? (direction = 'up') : (direction = 'down')
+    console.log(e)
     if (slider.marker) {
         wheelAct(direction)
     }
@@ -25,7 +26,6 @@ function wheel(e) {
 // блокирует слайдер если wheel генерируется безостановочно
 function wheelAct(direction) {
     if (slider.marker) move(direction)
-
     slider.marker = false
     slider.counter2 = slider.counter1
     setTimeout(function () {
@@ -65,6 +65,9 @@ function moveElements() {
             setTimeout(() => {
                 timer = true
             }, slider.intervalSlider)
+
+            const event = new Event('click', { bubbles: false })
+            document.dispatchEvent(event)
         }
     }
 }

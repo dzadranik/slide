@@ -19,6 +19,7 @@ module.exports = {
     },
     entry: {
         main: `${PATHS.src}/js/main.js`,
+        chart: `${PATHS.src}/js/chart.js`
     },
     output: {
         filename: 'js/[name].js',

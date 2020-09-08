@@ -1,0 +1,34 @@
+@import '../../node_modules/reset-css/sass/_reset'
+
+$clrWhite: rgba(255, 255, 255, 1)
+$clrBlue: rgba(2, 119, 202, 1)
+
+body
+    width: 100%
+    height: 100vh
+    font-family: 'Helvetica Neue', sans-serif
+    font-size: 16PX
+
+// sass-lint:disable class-name-format
+.chart,
+.chart2
+    max-width: 500px
+    margin-bottom: 50px
+
+.ch-chart
+    &_svgPie
+        display: block
+        margin: 0 auto 25px
+    &_svgLine
+        margin-bottom: 25px
+    &_legend
+        margin-bottom: 7px
+        margin-left: 20px
+    &_legendTag
+        display: inline-block
+        width: 19px
+        height: 19px
+        margin-right: 10px
+        margin-bottom: -3px
+    &_legendPerc
+        font-weight: 600
