@@ -21,7 +21,8 @@ writeChart(pieData, '.chart', 'pie')
 // цвета
 function getColors(i) {
     var colors = ['#E94335', '#4385F6', '#32A653', '#F8BC04']
-    return colors[i]
+    // colors d3 https://github.com/d3/d3-scale-chromatic/blob/v2.0.0/README.md
+    return d3.schemeSet3[i]
 }
 
 // 3 графика vertGist, gorizGist, pie
@@ -29,8 +30,6 @@ function writeChart(value, elem, type) {
     var data = value,
         svgWidth = 300,
         svgHeight = 220,
-        barWidth = 30,
-        barHeight = 24,
         barMargin = 10,
         axisColor = 'rgba(196, 196, 196, 1.0)' // серый цвет для осей
 
@@ -47,8 +46,12 @@ function writeChart(value, elem, type) {
 
     // TITLE: вертикальный график
     if (type === 'vertGist') {
-        // процентное отношение значения к высоте svg
-        var percentValue = (svgHeight - barMargin * 3) / maxValue
+        // вичисляем ширину бара от ширины svg
+        var barWidth = (svgWidth - barMargin * 6) / data.length - barMargin,
+            // процентное отношение значения к высоте svg
+            percentValue = (svgHeight - barMargin * 3) / maxValue
+
+        console.log(barWidth)
 
         var bar = svg
             .selectAll('g')
@@ -99,8 +102,11 @@ function writeChart(value, elem, type) {
         svg.selectAll('.tick').filter(':last-child').remove()
     } else if (type === 'gorizGist') {
         // TITLE: горизонтальный график
-        var scaleFactor = svgWidth / maxValue / 1.2
-        var svgHeight = (barHeight + barMargin) * data.length + 50
+        var barHeight = 24,
+            svgHeight = (barHeight + barMargin) * data.length + barMargin * 3,
+            scaleFactor = svgWidth / maxValue / 1.2
+
+        svg.attr('height', svgHeight)
 
         var bar = svg
             .selectAll('g')
@@ -109,8 +115,10 @@ function writeChart(value, elem, type) {
             .append('g')
             .attr('transform', function (d, i) {
                 return (
-                    'translate(20,' +
-                    (i * (barHeight + barMargin) + barMargin * 2) +
+                    'translate(' +
+                    barMargin * 2 +
+                    ',' +
+                    (i * (barHeight + barMargin) + barMargin) +
                     ')'
                 )
             })
