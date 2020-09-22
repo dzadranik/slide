@@ -6,7 +6,7 @@ $clrBlue: rgba(2, 119, 202, 1)
 body
     width: 100%
     height: 100vh
-    font-family: 'Helvetica Neue', sans-serif
+    font-family: 'Roboto', sans-serif
     font-size: 16PX
 
 // sass-lint:disable class-name-format
@@ -32,3 +32,84 @@ body
         margin-bottom: -3px
     &_legendPerc
         font-weight: 600
+
+.charts-container
+    .onechart
+        position: relative
+        display: flex
+        padding-bottom: 50px
+        margin-bottom: 50px
+        border-bottom: 1px solid #000
+        &:last-child
+            padding-bottom: 0
+            margin-bottom: 0
+            border-bottom: 0
+    .left
+        flex: 0 0 300px
+    .right
+        flex: 0 0 calc(100% - 300px)
+        width: calc(100% - 300px)
+        padding-top: 15px
+        padding-left: 25px
+        .tit
+            font-size: 14px
+            font-style: normal
+            font-weight: 900
+            line-height: 20px
+            color: #000
+        .tt
+            margin-top: 5px
+            margin-bottom: 40px
+            font-size: 14px
+            font-style: normal
+            font-weight: normal
+            line-height: 20px
+            color: #000
+        .legend-dot
+            display: inline-block
+            width: 17px
+            height: 17px
+            margin-right: 10px
+            border-radius: 20px
+        ul
+            padding-left: 20px
+            margin-bottom: 0
+            text-indent: 0
+            columns: 2
+            -webkit-columns: 2
+            -moz-columns: 2
+        li
+            margin-bottom: 20px
+            list-style: none
+            &:before
+                display: none
+            > span
+                vertical-align: top
+            .text
+                display: inline-block
+                width: calc(100% - 30px)
+                margin-top: 1px
+.arc
+    .arc-hover
+        transition: opacity .3s ease-in-out
+    &.is-hover
+        .arc-hover
+            opacity: .5
+.chr-hint
+    position: absolute
+    max-width: 150px
+    padding: 10px
+    margin-top: -10px
+    font-size: 12px
+    background: rgba(255, 255, 255, .8)
+    border: 1px solid
+    // margin-left: 10px
+    transform: translate(-50%, -100%)
+    &_title
+        margin-bottom: 10px
+        font-weight: bold
+    &_arrow
+        position: absolute
+        bottom: -8px
+        left: 50%
+        margin-left: -6px

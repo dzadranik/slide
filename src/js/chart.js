@@ -20,7 +20,7 @@ writeChart(pieData, '.chart', 'pie')
 
 // цвета
 function getColors(i) {
-    var colors = ['#E94335', '#4385F6', '#32A653', '#F8BC04']
+    // var colors = ['#E94335', '#4385F6', '#32A653', '#F8BC04']
     // colors d3 https://github.com/d3/d3-scale-chromatic/blob/v2.0.0/README.md
     return d3.schemeSet3[i]
 }
@@ -50,8 +50,6 @@ function writeChart(value, elem, type) {
         var barWidth = (svgWidth - barMargin * 6) / data.length - barMargin,
             // процентное отношение значения к высоте svg
             percentValue = (svgHeight - barMargin * 3) / maxValue
-
-        console.log(barWidth)
 
         var bar = svg
             .selectAll('g')
