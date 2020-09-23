@@ -1,6 +1,7 @@
 $(function () {
-    function createChart(idPlace, idLegend, data, dataLegend, dataTitle) {
-        var dataset = data,
+    function createChart(idPlace, data, dataLegend, dataTitle) {
+        var // chart datas
+            dataset = data,
             pie = d3.pie(),
             color = d3.scaleOrdinal(d3.schemeCategory10),
             w = 300,
@@ -19,15 +20,26 @@ $(function () {
             arcOutter2 = d3
                 .arc()
                 .innerRadius(outerRadius + 5)
-                .outerRadius(outerRadius + 12)
+                .outerRadius(outerRadius + 12),
+            // arc для border
+            arcOutter3 = d3
+                .arc()
+                .innerRadius(0)
+                .outerRadius(outerRadius + 15)
+
+        // вычислим процент
+        let valuePercent = 100 / data.reduce((sum, current) => sum + current, 0)
+
+        console.log(valuePercent)
+
         // легенды
-        var divLegend = d3.select(idLegend),
+        var divLegend = d3.select(idPlace + ' .legendsWrap'),
             keysLegend = dataLegend,
             colorLegend = d3.scaleOrdinal(d3.schemeCategory10)
 
-        // График
+        // график
         var svg = d3
-            .select(idPlace)
+            .select(idPlace + ' .chartWrap')
             .append('svg')
             .attr('width', w)
             .attr('height', h)
@@ -45,19 +57,19 @@ $(function () {
                 return keysLegend[i] + ' (' + d.value + '%)'
             })
             .attr('data-text', function (d) {
-                let txt = 'жалоб'
-                if (d.value === 1) txt = 'жалоба'
-                if (d.value === 2 || d.value === 3 || d.value === 4)
+                let txt = 'жалоб',
+                    lastS = d.value.toString().slice(-1)
+                if (lastS === '1') txt = 'жалоба'
+                if (
+                    (lastS === '2' || lastS === '3' || lastS === '4') &&
+                    !(d.value > 10 && d.value < 20)
+                )
                     txt = 'жалобы'
-                return dataTitle + ' ' + d.value + ' ' + txt
+                return dataTitle + ' - ' + d.value + ' ' + txt
             })
 
         // серый основной радиус
-        arcs.append('path')
-            .attr('fill', '#eaeaea')
-            .attr('d', arc)
-            .style('stroke', 'white')
-            .style('stroke-width', 3)
+        arcs.append('path').attr('fill', '#eaeaea').attr('d', arc)
         // внешний цветной радиус
         arcs.append('path')
             .attr('fill', function (d, i) {
@@ -72,6 +84,15 @@ $(function () {
             .attr('d', arcOutter2)
             .attr('opacity', 0)
             .attr('class', 'arc-hover')
+        //  радиус для border
+        arcs.append('path')
+            .attr('fill', function (d, i) {
+                return color(i)
+            })
+            .attr('d', arcOutter3)
+            .attr('fill', 'transparent')
+            .style('stroke', 'white')
+            .style('stroke-width', 4)
 
         // текст на графике
         arcs.append('text')
@@ -83,7 +104,7 @@ $(function () {
                 if (d.endAngle - d.startAngle < 0.5) {
                     return ''
                 }
-                return d.value + '%'
+                return Math.round(d.value * valuePercent) + '%'
             })
             .attr('class', 'chart-txt')
 
@@ -113,9 +134,10 @@ $(function () {
             .data(dataset)
             .attr('class', 'count')
             .html(function (d) {
-                return ' (' + d + '%)'
+                return ' (' + Math.round(d * valuePercent) + '%)'
             })
 
+        // хинт по ховеру
         $('.arc').hover(
             function (e) {
                 $(e.currentTarget).addClass('is-hover')
@@ -137,7 +159,7 @@ $(function () {
                 let pos = $(e.currentTarget).find('.chart-txt').position()
 
                 // html хинта
-                $(idPlace).append(
+                $(e.currentTarget).parents('.chartWrap').append(
                     `<div class="chr-hint js-chartHint">
                         <div class="chr-hint_title">${title}</div>
                         <div class=" class="chr-hint_text">${text}</div>
@@ -176,7 +198,6 @@ $(function () {
     $('.onechart').each(function () {
         createChart(
             '#chart' + chartCount,
-            '#chartlegend' + chartCount,
             $(this).data('chart'),
             $(this).data('chartlegend'),
             $(this).data('chartTitle')
