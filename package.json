@@ -34,7 +34,7 @@
         "postcss-loader": "^3.0.0",
         "postcss-pxtoremorem": "^5.1.1",
         "prettier": "^2.0.5",
-        "pug": "^3.0.0",
+        "pug": "^3.0.1",
         "pug-loader": "^2.4.0",
         "reset-css": "^5.0.1",
         "sass": "^1.26.9",
